@@ -10,25 +10,43 @@ const loadAllPosts = async () => {
 }
 loadAllPosts()
 const allPosts = async (searchText) => {
-    const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts?category=${searchText}`)
-    const data = await res.json()
-    const postComment = data.posts
-    // console.log(postComment[0])
-    CommentLeftSection(postComment)
-}
+    const res = await fetch(
+        `https://openapi.programming-hero.com/api/retro-forum/posts?category=${searchText}`
+    );
+    const data = await res.json();
+    const postComment = data.posts;
+    commentSectionLeft.textContent = '';
+
+    if (!postComment || postComment.length === 0) {
+        commentSectionLeft.innerHTML = `
+            <div class="text-center py-10 text-gray-500 w-full">
+                <p class="text-lg font-semibold">😕 No results found</p>
+                <p class="text-sm">Try a different keyword</p>
+            </div>
+        `;
+        return;
+    }
+
+    CommentLeftSection(postComment);
+};
+
 
 function searchHandle() {
     const searchInput = document.getElementById('search-input');
-    const searchText = searchInput.value;
+    const searchText = searchInput.value.trim();
     // console.log(searchText)
+    if(!searchText){
+        loadAllPosts();
+        return;
+    }
     allPosts(searchText)
 }
 const CommentLeftSection = (postComment) => {
-    commentSectionLeft.textContent = ''
+    commentSectionLeft.textContent = '';
     postComment.forEach(post => {
         const contentSectionLeft = document.getElementById('comment-section-left');
         const commentSectionDiv = document.createElement('div')
-        commentSectionDiv.classList = `flex lg:flex-row flex-col justify-start gap-2 mt-10 bg-[#F5E7C6]`;
+        commentSectionDiv.classList = `flex lg:flex-row flex-col justify-start gap-2 mt-10 bg-[#F5E7C6] rounded-lg`;
         commentSectionDiv.innerHTML = `
         <!-- avatar -->
         <div class="avatar-content relative">
