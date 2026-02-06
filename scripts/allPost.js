@@ -35,7 +35,7 @@ function searchHandle() {
     const searchInput = document.getElementById('search-input');
     const searchText = searchInput.value.trim();
     // console.log(searchText)
-    if(!searchText){
+    if (!searchText) {
         loadAllPosts();
         return;
     }
@@ -109,17 +109,22 @@ const readPosts = [];
 const handleMessage = async (id) => {
     const markRead = document.getElementById('mark-read')
     console.log('handle message', id);
-    if(readPosts.includes(id)){
+    if (readPosts.includes(id)) {
         const readDiv = document.createElement('div');
-        readDiv.classList = 'text-red-500 font-semibold';
-        readDiv.textContent = 'This content is read';
+        // readDiv.classList = 'text-red-500 font-semibold';
+        readDiv.innerHTML = `
+            <div role="alert" class="alert alert-error alert-soft">
+                <span>This content is read.</span>
+            </div>
+        `
+        // readDiv.textContent = 'This content is read';
         titleText.appendChild(readDiv);
         return;
     }
     const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts?id=${id}`);
     const data = await res.json();
     const post = data.posts.find(p => p.id == id);
-    if(!post) return;
+    if (!post) return;
     readPosts.push(id)
     console.log(post);
     countMarkRead++;
@@ -127,13 +132,18 @@ const handleMessage = async (id) => {
     showTitle(post);
 }
 const showTitle = (post) => {
-    
+
     // titleText.textContent = ''; 
     const titleDiv = document.createElement('div');
     titleDiv.classList = 'flex justify-between';
     titleDiv.innerHTML = `
-        <p class="single-line-title">${post.title}</p>
-        <p class="flex items-center gap-1"><i class="fa-regular fa-eye mr-1"></i>${post.view_count || 1568}</p>
+        <div class="card w-96 bg-base-100 card-xs shadow-sm p-4 mb-2">
+            <div class="card-body flex flex-row justify-between">
+                <p class="single-line-title card-title">${post.title}</p>
+                <p class="flex items-center"><i class="fa-regular fa-eye mr-1"></i>${post.view_count || 1568}</p>
+                
+            </div>
+        </div>
         `;
     titleText.appendChild(titleDiv);
 }
