@@ -3,6 +3,7 @@ const commentSectionLeft = document.getElementById('comment-section-left');
 const titleText = document.getElementById('title-content');
 let countMarkRead = 0;
 const loadAllPosts = async () => {
+    setTimeout(() => toggleloadingSpinner(true), 300);
     const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts`);
     const data = await res.json();
     const posts = data.posts;
@@ -10,6 +11,7 @@ const loadAllPosts = async () => {
 }
 loadAllPosts()
 const allPosts = async (searchText) => {
+    toggleloadingSpinner(true)
     const res = await fetch(
         `https://openapi.programming-hero.com/api/retro-forum/posts?category=${searchText}`
     );
@@ -24,9 +26,10 @@ const allPosts = async (searchText) => {
                 <p class="text-sm">Try a different keyword</p>
             </div>
         `;
+        setTimeout(() => toggleloadingSpinner(false), 300);
         return;
     }
-
+    // toggleloadingSpinner(false)
     CommentLeftSection(postComment);
 };
 
@@ -46,7 +49,7 @@ const CommentLeftSection = (postComment) => {
     postComment.forEach(post => {
         const contentSectionLeft = document.getElementById('comment-section-left');
         const commentSectionDiv = document.createElement('div')
-        commentSectionDiv.classList = `flex lg:flex-row flex-col justify-start gap-2 mt-10 bg-[#F5E7C6] rounded-lg`;
+        commentSectionDiv.classList = `flex lg:flex-row flex-col justify-start gap-2 mt-10 rounded-lg border-2 border-purple-500 shadow-lg`;
         commentSectionDiv.innerHTML = `
         <!-- avatar -->
         <div class="avatar-content relative">
@@ -97,12 +100,17 @@ const CommentLeftSection = (postComment) => {
         if (post.isActive) {
             avatarContentActive.classList.add('bg-green-400')
             avatarContentActive.classList.remove('bg-red-400')
+            commentSectionDiv.classList.add('bg-[#4988C44D]','border-purple-500')
+            commentSectionDiv.classList.remove('bg-[#4988C40A]','border-indigo-500/50')
         }
         else {
             avatarContentActive.classList.remove('bg-green-400')
             avatarContentActive.classList.add('bg-red-400')
+            commentSectionDiv.classList.remove('bg-[#4988C44D]','border-purple-500')
+            commentSectionDiv.classList.add('bg-[#4988C40A]','border-indigo-500/50')
         }
     });
+    setTimeout(() => toggleloadingSpinner(false), 300);
 }
 const readPosts = [];
 
@@ -148,3 +156,13 @@ const showTitle = (post) => {
     titleText.appendChild(titleDiv);
 }
 
+const toggleloadingSpinner = (isloading) => {
+    const loadingSpinner = document.getElementById('loading-spinner');
+    if(isloading){
+        loadingSpinner.classList.remove('hidden')
+    }
+    else{
+        loadingSpinner.classList.add('hidden');
+    }
+}
+// toggleloadingSpinner(true);
