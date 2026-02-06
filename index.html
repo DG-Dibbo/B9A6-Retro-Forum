@@ -196,10 +196,12 @@
                         <div>
                             <div class="flex justify-between items-center">
                                 <h3 class="font-bold text-xl">Title</h3>
-                                <p class="text-base font-normal">Mark you read <span id="mark-read" class="text-base">0</span></p>
+                                <p class="text-base font-normal">Mark you read
+                                    <span id="mark-read"
+                                        class="text-base">0</span></p>
                             </div>
                             <div id="title-content">
-                                
+
                             </div>
                         </div>
                     </div>
@@ -208,9 +210,87 @@
 
             </section>
 
+            <!-- Banner section Join Forum -->
+            <section class="container mx-auto px-4 md:px-10 lg:px-40 mt-6">
+                <!-- Banner -->
+                <div
+                    class="bg-slate-400 bg-cover bg-center rounded-xl min-h-[220px] md:min-h[450px] flex flex-col md:flex-row items-center justify-between gap-6 md:gap-12 p-6 md:p-12">
+
+                    <!-- Left content -->
+                    <div class="space-y-4 text-center md:text-left">
+                        <h3
+                            class="text-white text-3xl md:text-5xl font-bold leading-tight">
+                            Join Our <span class="text-indigo-950">Forum</span>
+                        </h3>
+
+                        <p class="text-white text-sm md:text-base font-light">
+                            Share your favorite opinion and win and wp forum
+                            coffee mug! Yes, you can run unit tests and view the
+                            results directly within the app.
+                        </p>
+                        <button
+                            class="btn bg-[#6787dc] text-[#f0edd2] border-[#5e72bb]">
+                            <i class="fa-regular fa-registered"></i>
+                            Register Now
+                        </button>
+                    </div>
+
+                    <!-- Right stats card -->
+                    <div>
+                        <img src="images/joinforum.png" alt>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- lqtest post -->
+            <div class="container mx-auto px-4 md:px-10 lg:px-40 mt-6">
+                <div
+                    class="flex flex-col justify-center items-center space-y-3">
+                    <h3 class="text-2xl lg:text-5xl font-bold">Latest Posts</h3>
+                    <p class="text-center md:mx-6">Yes, you can run unit tests
+                        and view the results directly within the app. <br> The
+                        integrated testing features allow for a streamlined.</p>
+                </div>
+            </div>
+
+            <!-- latest post card content -->
+            <section class="container mx-auto px-4 md:px-10 lg:px-40 mt-6">
+                <div id="latest-post-content"
+                    class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 space-x-4">
+                    <!-- this content inside latestPost.js -->
+                </div>
+            </section>
         </main>
 
+        <footer
+            class="footer footer-horizontal footer-center bg-gray-400 text-primary-content p-10">
+            <div class="items-center">
+                <img src="images/logo.png" alt>
+                <p class="font-medium">
+                    Contrary to popular belief, Lorem Ipsum is not simply random
+                    text. <br> It has roots in a
+                    piece of classical Latin literature from 45 BC
+                </p>
+                <div class="grid grid-flow-col gap-4 mt-4">
+                    <a>
+                        <i class="fa-brands fa-twitter text-xl"></i>
+                    </a>
+                    <a>
+                        <i class="fa-brands fa-facebook-f text-xl"></i>
+                    </a>
+                    <a>
+                        <i class="fa-brands fa-instagram text-xl"></i>
+                    </a>
+                    <a>
+                        <i class="fa-brands fa-github text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <p class="mt-10">Copyright © All right reserved</p>
+        </footer>
         <!-- script src -->
         <script src="scripts/allPost.js"></script>
+        <script src="scripts/latestPost.js"></script>
     </body>
 </html>
